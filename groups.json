@@ -1,0 +1,34 @@
+{
+	"fudidos_do_ic": [
+		[
+			"bequinha",
+			"admin"
+		],
+		[
+			"vini",
+			"normal_user"
+		]
+	],
+	"lolo": [
+		[
+			"bequinha",
+			"admin"
+		]
+	],
+	"gaga": [
+		[
+			"bequinha",
+			"admin"
+		]
+	],
+	"novo_grupo": [
+		[
+			"vini_alternativo",
+			"admin"
+		],
+		[
+			"bequinha",
+			"normal_user"
+		]
+	]
+}

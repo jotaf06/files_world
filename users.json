@@ -1,0 +1,57 @@
+{
+	"bebeca": {
+		"password": "2564",
+		"nickname": "bequinha",
+		"privacity": 1
+	},
+	"vivivi": {
+		"password": "147",
+		"nickname": "nononick",
+		"privacity": 0
+	},
+	"vini_cabral": {
+		"password": "14",
+		"nickname": "vini",
+		"privacity": 0
+	},
+	"bb": {
+		"password": "15",
+		"nickname": "bebebeb",
+		"privacity": 0
+	},
+	"vini1": {
+		"password": "1",
+		"nickname": "vinininini",
+		"privacity": 0
+	},
+	"vini2": {
+		"password": "2",
+		"nickname": "vini",
+		"privacity": 0
+	},
+	"guilherme_rezende": {
+		"password": "123",
+		"nickname": "gui",
+		"privacity": 0
+	},
+	"gui": {
+		"password": "123",
+		"nickname": "gg",
+		"privacity": 0
+	},
+	"vini_cabral12": {
+		"password": "1234",
+		"nickname": "vini_alternativo",
+		"privacity": 0
+	},
+	"leo2003": {
+		"password": "123",
+		"nickname": "leo",
+		"privacity": 0
+	},
+	"landri": {
+		"password": "landri1",
+		"nickname": "landri1",
+		"privacity": 1
+	}
+}
