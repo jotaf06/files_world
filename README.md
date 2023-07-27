@@ -1,8 +1,9 @@
-# RePros
+# Files_World
 - Projeto Python da disciplina Projeto de Software
 - Integrantes: Carlos Vinicius, Jose Felix, Vinicius Cabral, Landri Alencar
-- Descricao do Projeto: RePros é uma rede de relacionamentos implementada nos moldes das redes: Twitter, MSN, e WhatsApp.
+- Uma rede de compartilhamento de arquivos genéricos.
 
+Funcionalidades:
   1. Criação de usuário.
 
   2. Edição de Perfil.
