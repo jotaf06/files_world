@@ -1,4 +1,4 @@
-from load_functions import salva_amizades
+from data_manager_class import salva_amizades
 
 def adiciona_amigo(user_login, relations):
     new_friend_nickname = input("\nQual seu novo amigo?: ")

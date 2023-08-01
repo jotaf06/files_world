@@ -1,5 +1,5 @@
 import os
-from singning_up import find_user
+from singning_up_class import find_user
 
 def show_perfil(user_login, users, relations):
     """Mostra as informações associadas a um perfil com base no nickname fornecido"""
