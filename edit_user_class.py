@@ -1,7 +1,9 @@
 from singning_up_class import SingInUP
+from data_manager_class import DataManager
 
-class UserEdit:
+class UserEdit(DataManager):
     def __init__(self, users, user_login):
+        super().__init__('users.json')
         self.user_login = user_login
         self.users = users
 
@@ -34,7 +36,6 @@ class UserEdit:
         if command == 'del':
             del self.users[self.user_login]
             return True
-        
         elif command == 'cancelar':
             print("Operação abordada...\n")
             return False
@@ -63,10 +64,11 @@ class UserEdit:
             elif command == 'delecao_de_conta':
                 remocao = self.remove_user()
                 if remocao:
+                    self.save_data(self.users)
                     print("Usuário removido, saindo da aplicação.")
                     exit()
             elif command == 'sair':
-                print(self.users[self.user_login], self.user_login,"\nEncerrando operação de edição...\n")
+                print(self.user_login, ":", self.users[self.user_login], "\nEncerrando operação de edição...\n")
                 break
 
     def print_edit_options(self):

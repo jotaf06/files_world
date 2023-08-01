@@ -43,15 +43,5 @@
 		"password": "123",
 		"nickname": "leo",
 		"privacity": 0
-	},
-	"landri": {
-		"password": "landri1",
-		"nickname": "landri1",
-		"privacity": 1
-	},
-	"bebeca": {
-		"password": "2564",
-		"nickname": "bequinha_novinha",
-		"privacity": 1
 	}
 }
