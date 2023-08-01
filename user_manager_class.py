@@ -73,7 +73,6 @@ class UsersManager(DataManager):
     def entrar_grupo(self, user_login):
         self.groups_manager.entrar_grupo(self.users, user_login, self.groups)
 
-
     def lista_de_comandos(self):
         print("\n'editar_usuario' - edita as informações associadas a um usuário.")
         print("'acessar_perfil' - para acessar as informações/arquivos de um usuário.")
