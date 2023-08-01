@@ -1,8 +1,8 @@
 from singning_up_class import SingInUP
 from data_manager_class import DataManager
 
-class UserEdit(DataManager):
-    def __init__(self, users, user_login):
+class UserEditor(DataManager):
+    def __init__(self, user_login, users):
         super().__init__('users.json')
         self.user_login = user_login
         self.users = users

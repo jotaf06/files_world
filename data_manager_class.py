@@ -29,34 +29,33 @@ class GroupsManager(DataManager):
             else: 
                 self.groups[new_group_name] = {'admins' : [user_nickname], 
                                                'users' : [user_nickname]}
-        
-                self.save_data()
+
+                self.save_data(self.groups)
                 print(f"\nGrupo criado com sucesso {user_nickname}.")
                 break
 
     def add_membro(self, user_nickname, group_name):
         """Adiciona um membro"""
-        group = self.groups[group_name]
-        if user_nickname not in group['admins']:
+        if user_nickname not in self.groups[group_name]['admins']:
             print("Você não tem permissão para realizar essa operação...")
-
         else:
             print("\nOlá admin")
             new_member_nickname = input("Quem você deseja adicionar no seu grupo?: ")
             acces_level = input("Qual o nível de acesso do usuário? (admin ou user): ")
 
             if acces_level == "admin":
-                group['admins'].append(new_member_nickname)
+                self.groups[group_name]['admins'].append(new_member_nickname)
             else:
-                group['users'].append(new_member_nickname)
+                self.groups[group_name]['users'].append(new_member_nickname)
 
-            self.load_data()
+            self.save_data(self.groups)
             print("Operação bem sucedida.")
 
     def eh_membro(self, user_nickname, group):
         """Verifica se um usuario eh membro de certo grupo"""
-        for user in group:
-            if user[0] == user_nickname:
+        users = group['users']
+        for user in users:
+            if user == user_nickname:
                 return user
         return None
 
@@ -69,8 +68,7 @@ class GroupsManager(DataManager):
         else:
             group = groups[group_name]
             user_nickname = users[user_login]['nickname']
-            print(user_nickname)
-            user_membro = eh_membro(user_nickname, group)
+            user_membro = self.eh_membro(user_nickname, group)
             if user_membro != None:
                 print(f"\nBem vindo a {group_name}, {user_nickname}.")
                 
@@ -80,15 +78,23 @@ class GroupsManager(DataManager):
                     
                     command = input("comando: ")
                     if command == 'add_membro':
-                        add_membro(user_membro, groups, group)
+                        self.add_membro(user_membro, group_name)
 
                     elif command == 'sair':
                         print("Saindo do grupo...")
                         break
-            
             else:
                 print("Você não é membro desse grupo!")
 
 class FriendshipManager(DataManager):
     def __init__(self):
         super().__init__('amigos.json')
+    
+    def adiciona_amigo(self, user_login, friendships):
+        new_friend_nickname = input("\nQual o nickname do seu novo amigo?: ")
+        
+        if user_login not in friendships:
+            friendships[user_login] = [new_friend_nickname]
+        else:
+            friendships[user_login].append(new_friend_nickname)
+        print("Amigo adicionado!!\n")

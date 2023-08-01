@@ -1,7 +1,7 @@
 
 from user_manager_class import UsersManager
 
-class RePros:
+class FilesWorld:
     def __init__(self):
         self.users_manager = UsersManager()
 
@@ -48,5 +48,5 @@ class RePros:
                 exit = True
 
 if __name__ == "__main__":
-    rede_repros = RePros()
+    rede_repros = FilesWorld()
     rede_repros.run()

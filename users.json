@@ -4,11 +4,6 @@
 		"nickname": "nononick",
 		"privacity": 0
 	},
-	"vini_cabral": {
-		"password": "14",
-		"nickname": "vini",
-		"privacity": 0
-	},
 	"bb": {
 		"password": "15",
 		"nickname": "bebebeb",
@@ -42,6 +37,11 @@
 	"leo2003": {
 		"password": "123",
 		"nickname": "leo",
+		"privacity": 0
+	},
+	"vk": {
+		"password": "14",
+		"nickname": "vini_repetido",
 		"privacity": 0
 	}
 }
