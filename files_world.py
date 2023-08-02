@@ -1,15 +1,16 @@
 
 from user_manager_class import UsersManager
+from singning_up_class import SingInUP
 
 class FilesWorld:
     def __init__(self):
         self.users_manager = UsersManager()
+        self.users = self.users_manager.load_data()
 
     def run(self):
         print("BEM VINDO A REDE RePros!\n")
         print("ATENÇÃO: Os comandos da rede devem ser fornecidos exatamente como forem apresentados.")
 
-        users = self.users_manager.load_data()
         exit = False
         while not exit:
 
@@ -22,11 +23,11 @@ class FilesWorld:
                 input_login = input("login: ")
                 input_password = input("senha: ")
 
-                if input_login not in users:
+                if input_login not in self.users:
                     print("Usuário inexistente. Esse login não está cadastrado na rede.")
                     print("Abordando operação sing_in...\n")
                 else:
-                    if users[input_login]['password'] != input_password:
+                    if self.users[input_login]['password'] != input_password:
                         print("Senha inválida!!!\n")
                     else:            
                         print("sing_in realizado com sucesso, entrando na rede RePros...\n")
@@ -39,7 +40,10 @@ class FilesWorld:
                 age = input("Resposta: ")
 
                 if age == 'sim':
-                    create_new_user(self.users)
+                    singup_manager = SingInUP()
+                    singup_manager.create_new_user(self.users_manager.users)
+                    self.users_manager.save_data(self.users_manager.users)
+                    self.users = self.users_manager.load_data()
                 
                 elif age == 'nao':
                     print("Você não tem idade suficiente para ser um usuário dessa rede.\n\n")

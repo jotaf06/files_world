@@ -43,5 +43,20 @@
 		"password": "14",
 		"nickname": "vini_repetido",
 		"privacity": 0
+	},
+	"newvini": {
+		"password": "123",
+		"nickname": "vvini",
+		"privacity": 0
+	},
+	"vinicabral": {
+		"password": "1234",
+		"nickname": "vini12",
+		"privacity": 0
+	},
+	"bebeca01": {
+		"password": "123456",
+		"nickname": "bequinha_amor_da_minha_vida",
+		"privacity": 0
 	}
 }
