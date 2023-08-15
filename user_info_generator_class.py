@@ -1,40 +1,38 @@
+from find_user_bynick_class import FindUser
+
 class UserInfoGenerator():
     def __init__(self, users):
         self.users = users
 
-    def new_login_user(self):
+    def new_login(self):
         """Determina um novo login válido"""
-        new_login = input('\nDigite seu novo login: ')
+        login = input('\nDigite seu novo login: ')
         while True:
-            if new_login not in self.users:
+            if login not in self.users:
                 print('Login válido!!')
-                return new_login
+                return login
             else:
                 print('Esse login ja existe')
-                new_login = input('\nDigite um outro login: ')
+                login = input('\nDigite um outro login: ')
 
-    def find_user(self, new_nickname):
-        """Procura o usuário que possui tal nickname"""
-        for ouser in self.users.values():
-            if ouser.nickname == new_nickname:
-                return True
-        return False
-
-    def new_nickname_user(self):
+    def new_nickname(self):
         """Determina um novo nickname válido"""
-        new_nickname = input('\nDigite seu novo nickname: ')
+        nickname = input('\nDigite seu novo nickname: ')
         while True:
-            if self.find_user(new_nickname) == False:
+            if FindUser().find(self.users, nickname) == None:
                 print('\nnickname válido!!')
-                return new_nickname
+                return nickname
             else:
                 print('\nEsse nickname ja existe')
-                new_nickname = input('\nDigite um outro nickname: ')
+                nickname = input('\nDigite um outro nickname: ')
 
-    def generate_info(self):
+    def new_password(self):
+        return input('\nDigite sua senha: ')
+
+    def create_user(self):
         """Cria um novo usuário"""
-        user_login = self.new_login_user()
-        user_nickname = self.new_nickname_user()
-        user_password = input('\nDigite sua senha: ')
+        user_login = self.new_login()
+        user_nickname = self.new_nickname()
+        user_password = self.new_password()
         return user_login, user_nickname, user_password
         

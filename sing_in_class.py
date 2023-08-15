@@ -10,11 +10,13 @@ class SingIn():
         if login not in self.users:
             print("Usuário inexistente. Esse login não está cadastrado na rede.")
             print("Abordando operação sing_in...\n")
+            return None
         else:
             ouser = self.users[login]
             if ouser.password != password:
                 print("Senha inválida!!!\n")
+                return None
             else:            
                 print("sing_in realizado com sucesso!\n")
-                ouser.online = 1
+                return ouser
                 

@@ -15,6 +15,6 @@ class SingUp():
             print("Você não tem idade suficiente para ser um usuário dessa rede.\n\n")
         elif answer == 'sim':
             o_user_info_generator = UserInfoGenerator(self.users)
-            return o_user_info_generator.generate_info()
+            return o_user_info_generator.create_user()
 
             
