@@ -8,9 +8,6 @@ class FilesWorld():
         self.users = {}
         self.groups = {}
 
-    def session(self):
-        Session(self.users, self.groups, )
-
     def singning_in(self):
         ouser = SingIn(self.users).signing_in()
         if ouser:
