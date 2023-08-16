@@ -2,6 +2,11 @@ from session_command_class import SessionCommand
 from user_editor_class import UserEditor
 from perfil_access_class import PerfilAccess
 from perfil_files_manager_class import PerfilFilesManager
+from find_user_bynick_class import FindUser
+from group_creator_class import GrupoCreator
+from group_finder_byname_class import GroupFinder
+from group_session_class import GroupSession
+
 
 class Session():
     def __init__(self, users, groups, user):
@@ -24,25 +29,40 @@ class Session():
                 UserEditor(self.users, self.user).editor()
 
             elif command == 'acessar_perfil':
-                continuar = True
+                continuar = 1
                 while continuar:
                     a_user = PerfilAccess().access(self.users, self.user)
                     if a_user:
                         PerfilFilesManager().acessing(a_user)
-                    continuar = input("\nDigite 'True' para continuar ou 'False' para parar a operação: ")
+                    continuar = int(input("\nDigite '1' para continuar ou '0' para parar a operação: "))
                     
             elif command == 'add_amigo':
                 nickname = input("\nQual o nickname do seu novo amigo?: ")
-                self.user.friends.append(nickname)
-                print("Amigo adicionado!!\n")
+                ouser = FindUser().find(self.users, nickname)
+                if ouser:
+                    self.user.friends.append(ouser)
+                    print("Amigo adicionado!!\n")
 
             elif command == 'subir_arquivo':
                 PerfilFilesManager().uploading(self.user.nickname)
                 
             elif command == 'criar_grupo':
-                pass
+                GrupoCreator().creation(self.groups, self.user)
+
             elif command == 'entrar_grupo':
-                pass
+                name = input("\nNome do grupo em que se deseja entrar: ")
+                group = GroupFinder().find(self.groups, name)
+                if group == None:
+                    print("Esse grupo não existe")
+                else:
+                    if group not in self.user.groups:
+                        print("Você não eh membro do grupo.")
+                    else:
+                        GroupSession(self.users, group, self.user).session()
+
             elif command == 'sair':
                 sair_da_rede = True
                 print("Desconectando...\n")
+            
+            elif command == 'show':
+                print(self.user)

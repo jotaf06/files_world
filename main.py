@@ -2,7 +2,7 @@ from files_world import FilesWorld
 
 ofilesworld = FilesWorld()
 
-print("BEM VINDO A REDE RePros!\n")
+print("BEM VINDO A REDE FilesWorld!\n")
 print("ATENÇÃO: Os comandos da rede devem ser fornecidos exatamente como forem apresentados.")
 
 while True:

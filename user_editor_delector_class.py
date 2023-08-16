@@ -8,7 +8,7 @@ class UserEditorDelector():
         command = input("commando_de_delecao: ")
         if command == 'del':
             del users[user.login]
-            return True
+            print("Delecao de usuário realizada com sucesso.")
+            exit()
         elif command == 'cancelar':
             print("Operação abordada...\n")
-            return False

@@ -1,6 +1,6 @@
 class UserEditorCommands():
     def commands(self):
-        print("\n'opts' - mostra as opções de edição.")
+        print("\n'comandos' - mostra as opções de edição.")
         print("'login' - altera seu login.")
         print("'nickname' - altera o nickname")
         print("'senha' - muda a senha")

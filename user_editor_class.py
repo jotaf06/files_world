@@ -21,9 +21,9 @@ class UserEditor():
             elif command == 'login':
                 self.user.login = UserInfoGenerator(self.users).new_login()
             elif command == 'nickname':
-                self.user.nickname = UserInfoGenerator(self.user).new_nickname()
+                self.user.nickname = UserInfoGenerator(self.users).new_nickname()
             elif command == 'senha':
-                self.user.senha = UserInfoGenerator(self.users).new_password()
+                self.user.password = UserInfoGenerator(self.users).new_password()
             elif command == 'editar_privacidade':
                 UserEditorPrivacity().edition(self.user)
             elif command == 'delecao_de_conta':
@@ -32,6 +32,7 @@ class UserEditor():
                 print("***Estado Final Da Edição***")
                 print(f"    login: {self.user.login}")
                 print(f"    nickname: {self.user.nickname}")
-                print(f"    senha: {self.user.senha}")
+                print(f"    senha: {self.user.password}")
+                print(f"    privacidade: {self.user.privacity}")
                 print("Saindo da área de edição...\n")
                 sair_modo_edicao = True
