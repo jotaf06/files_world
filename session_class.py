@@ -1,4 +1,3 @@
-from session_command_class import SessionCommand
 from user_editor_class import UserEditor
 from perfil_access_class import PerfilAccess
 from perfil_files_manager_class import PerfilFilesManager
@@ -14,6 +13,18 @@ class Session():
         self.groups = groups
         self.user = user
 
+    def commands(self):
+        print("'editar_usuario' - edita as informações associadas a um usuário.")
+        print("'acessar_perfil' - para acessar as informações/arquivos de um usuário.")
+        print("'add_amigo' - adiciona um amigo.")
+        print("'subir_arquivo' - subir conteúdo no perfil.")
+        print("'criar_grupo' - cria um grupo.")
+        print("'entrar_grupo' - entrar em um grupo.")
+        print("'sair' - para se desconectar.\n")
+
+    def find(self, nickname):
+        FindUser(self.users, nickname).find()
+
     def session(self):
         print(f"Olá {self.user.nickname} Você está conectado a rede.")
         print("Digite 'lista_de_comandos' para ver os comandos da rede\n")
@@ -23,7 +34,7 @@ class Session():
 
             command = input("comando : ")
             if command == 'lista_de_comandos':
-                SessionCommand().commands()
+                self.commands()
 
             elif command == 'editar_usuario':
                 UserEditor(self.users, self.user).editor()
@@ -38,7 +49,7 @@ class Session():
                     
             elif command == 'add_amigo':
                 nickname = input("\nQual o nickname do seu novo amigo?: ")
-                ouser = FindUser().find(self.users, nickname)
+                ouser = self.find(nickname)
                 if ouser:
                     self.user.friends.append(ouser)
                     print("Amigo adicionado!!\n")
@@ -66,3 +77,4 @@ class Session():
             
             elif command == 'show':
                 print(self.user)
+        

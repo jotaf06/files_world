@@ -1,8 +1,24 @@
-from find_user_bynick_class import FindUser
-
 class UserInfoGenerator():
     def __init__(self, users):
         self.users = users
+
+    def find(self, nickname):
+        """Procura o usuário que possui tal nickname"""
+        for user in self.users.values():
+            if user.nickname == nickname:
+                return user
+        return None
+    
+    def new_nickname(self):
+        """Determina um novo nickname válido"""
+        nickname = input('\nDigite seu novo nickname: ')
+        while True:
+            if self.find(nickname) == None:
+                print('\nnickname válido!!')
+                return nickname
+            else:
+                print('\nEsse nickname ja existe')
+                nickname = input('\nDigite um outro nickname: ')
 
     def new_login(self):
         """Determina um novo login válido"""
@@ -15,24 +31,10 @@ class UserInfoGenerator():
                 print('Esse login ja existe')
                 login = input('\nDigite um outro login: ')
 
-    def new_nickname(self):
-        """Determina um novo nickname válido"""
-        nickname = input('\nDigite seu novo nickname: ')
-        while True:
-            if FindUser().find(self.users, nickname) == None:
-                print('\nnickname válido!!')
-                return nickname
-            else:
-                print('\nEsse nickname ja existe')
-                nickname = input('\nDigite um outro nickname: ')
-
     def new_password(self):
         return input('\nDigite sua senha: ')
 
-    def create_user(self):
+    def generate_info(self):
         """Cria um novo usuário"""
-        user_login = self.new_login()
-        user_nickname = self.new_nickname()
-        user_password = self.new_password()
-        return user_login, user_nickname, user_password
+        return self.new_login(), self.new_nickname(), self.new_password
         
