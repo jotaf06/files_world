@@ -1,13 +1,11 @@
+from find_user_bynick_class import FindUser
+
 class UserInfoGenerator():
     def __init__(self, users):
         self.users = users
 
     def find(self, nickname):
-        """Procura o usuário que possui tal nickname"""
-        for user in self.users.values():
-            if user.nickname == nickname:
-                return user
-        return None
+        FindUser(self.users, nickname).find()
     
     def new_nickname(self):
         """Determina um novo nickname válido"""

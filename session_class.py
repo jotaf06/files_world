@@ -12,6 +12,7 @@ class Session():
         self.users = users
         self.groups = groups
         self.user = user
+        self.finder = FindUser(self.users)
 
     def commands(self):
         print("'editar_usuario' - edita as informações associadas a um usuário.")
@@ -22,8 +23,10 @@ class Session():
         print("'entrar_grupo' - entrar em um grupo.")
         print("'sair' - para se desconectar.\n")
 
-    def find(self, nickname):
-        FindUser(self.users, nickname).find()
+    def find_user(self):
+        nickname = input("\nForneça o nickname do usuário: ")
+        a_user = self.finder.find_user(nickname)
+        return a_user
 
     def session(self):
         print(f"Olá {self.user.nickname} Você está conectado a rede.")

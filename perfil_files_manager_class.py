@@ -1,8 +1,31 @@
+from find_user_bynick_class import FindUser
 import os
 
 class PerfilFilesManager():
-    def acessing(self, user):
-        perfil_dir = os.path.join('files_world2', user.nickname)
+    def __init__(self, user, a_user):
+        self.user = user
+        self.a_user = a_user
+
+    def access_verification(self):
+        """faz a validação de acesso a um perfil"""
+        if self.a_user == None:
+            print("\nNão há usuário com esse perfil.")
+            return False
+        
+        elif self.a_user.privacity == 1:
+            print("\nEsse perfil é privado.")
+            if self.user in self.a_user.friends:
+                return True
+            else:
+                print("Você não tem acesso a esse perfil.")
+                return False
+    
+        elif self.a_user.privacity == 0:
+            print("\nEsse perfil é aberto.")
+            return True
+
+    def acessing(self):
+        perfil_dir = os.path.join('files_world2', self.a_user.nickname)
         print(perfil_dir)
         
         if not os.path.exists(perfil_dir):
@@ -16,7 +39,7 @@ class PerfilFilesManager():
                 for file in files:
                     print(file)
 
-    def uploading(self, nickname):
+    def uploading(self):
         """Faz upload de arquivo no perfil"""
         file_path = input("Forneça o caminho do arquivo: ")
         
@@ -25,7 +48,7 @@ class PerfilFilesManager():
             return None
 
         # Diretório de destino para salvar os arquivos
-        upload_dir = os.path.join('files_world2', nickname)
+        upload_dir = os.path.join('files_world2', self.user.nickname)
 
         # Criar o diretório de upload se não existir
         if not os.path.exists(upload_dir):
@@ -45,6 +68,6 @@ class PerfilFilesManager():
         file_info = {
             'file_name': file_name,
             'file_path': destination_path,
-            'uploaded_by': nickname
+            'uploaded_by': self.user.nickname
         }
         print(file_info)
