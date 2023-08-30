@@ -1,18 +1,30 @@
 from user_editor_class import UserEditor
 from perfil_access_class import PerfilAccess
 from perfil_files_manager_class import PerfilFilesManager
-from find_user_bynick_class import FindUser
+from finder_class import Finder
 from group_creator_class import GrupoCreator
-from group_finder_byname_class import GroupFinder
+from group_class import Group
 from group_session_class import GroupSession
 
 
 class Session():
     def __init__(self, users, groups, user):
         self.users = users
-        self.groups = groups
-        self.user = user
-        self.finder = FindUser(self.users)
+        self.__groups = groups
+        self.__user = user
+        self.finder = Finder(self.users, self.groups)
+
+    @property
+    def user(self):
+        return self.__user
+    
+    @property
+    def groups(self):
+        return self.__groups
+    
+    @groups.setter
+    def groups(self, new_group):
+        self.__groups[new_group.name] = new_group
 
     def commands(self):
         print("'editar_usuario' - edita as informações associadas a um usuário.")
@@ -27,57 +39,60 @@ class Session():
         nickname = input("\nForneça o nickname do usuário: ")
         a_user = self.finder.find_user(nickname)
         return a_user
+    
+    def find_group(self):
+        name = input("\nNome do grupo: ")
+        group = self.finder.find_group(name)
+        return group
 
-    def session(self):
-        print(f"Olá {self.user.nickname} Você está conectado a rede.")
-        print("Digite 'lista_de_comandos' para ver os comandos da rede\n")
+    def uploading(self):
+        PerfilFilesManager().uploading(self.user.nickname)
 
-        sair_da_rede = False
-        while sair_da_rede == False:
+    def group_creation(self):
+        """Cria um grupo em que o admim é o usuário de nickname user"""
+        while True:
+            name = input("\nNome do grupo: ")
+            group = self.finder.find_group(name)
+            if group:
+                    print("Ja existe um grupo com esse nome.")
+            else: 
+                new_group = Group(self.user, name)
+                self.user.groups = new_group
+                self.groups = new_group
+                print(f"\nGrupo criado com sucesso {self.user.nickname}.")
+                return
 
-            command = input("comando : ")
-            if command == 'lista_de_comandos':
-                self.commands()
-
-            elif command == 'editar_usuario':
-                UserEditor(self.users, self.user).editor()
-
-            elif command == 'acessar_perfil':
-                continuar = 1
-                while continuar:
-                    a_user = PerfilAccess().access(self.users, self.user)
-                    if a_user:
-                        PerfilFilesManager().acessing(a_user)
-                    continuar = int(input("\nDigite '1' para continuar ou '0' para parar a operação: "))
-                    
-            elif command == 'add_amigo':
-                nickname = input("\nQual o nickname do seu novo amigo?: ")
-                ouser = self.find(nickname)
-                if ouser:
-                    self.user.friends.append(ouser)
-                    print("Amigo adicionado!!\n")
-
-            elif command == 'subir_arquivo':
-                PerfilFilesManager().uploading(self.user.nickname)
-                
-            elif command == 'criar_grupo':
-                GrupoCreator().creation(self.groups, self.user)
-
-            elif command == 'entrar_grupo':
-                name = input("\nNome do grupo em que se deseja entrar: ")
-                group = GroupFinder().find(self.groups, name)
-                if group == None:
-                    print("Esse grupo não existe")
+    def entrar_grupo(self):
+        try:
+            group = self.find_group()
+            if group == None:
+                raise Exception("Esse grupo não existe\n")
+            else:
+                if group not in self.user.groups:
+                    raise Exception("Você não eh membro desse grupo\n")
                 else:
-                    if group not in self.user.groups:
-                        print("Você não eh membro do grupo.")
-                    else:
-                        GroupSession(self.users, group, self.user).session()
+                    self.group_session_init(group)
+        except Exception as e:
+            print(e)
 
-            elif command == 'sair':
-                sair_da_rede = True
-                print("Desconectando...\n")
+    def group_session_init(self, group):
+
+        print(f"\nBem vindo a {group.name}, {self.user.nickname}.")
+    
+        while True:
+            print("\n'add_membro' - para adicionar membro.")
+            print("'show', para informacoes do grupo")
+            print("'sair' - para sair do grupo.\n")
             
+            command = input("comando: ")
+            if command == 'add_membro':
+                a_user = self.find_user()
+                group.add_membro(a_user)
             elif command == 'show':
-                print(self.user)
+                group.show()
+            elif command == 'sair':
+                print("Saindo do grupo...")
+                break
+
+
         

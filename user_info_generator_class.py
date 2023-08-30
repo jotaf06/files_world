@@ -1,17 +1,17 @@
-from find_user_bynick_class import FindUser
+from finder_class import FindUser
 
 class UserInfoGenerator():
     def __init__(self, users):
         self.users = users
 
-    def find(self, nickname):
-        FindUser(self.users, nickname).find()
+    def find_user(self, nickname):
+        return FindUser(self.users).find_user(nickname)
     
     def new_nickname(self):
         """Determina um novo nickname válido"""
         nickname = input('\nDigite seu novo nickname: ')
         while True:
-            if self.find(nickname) == None:
+            if self.find_user(nickname) == None:
                 print('\nnickname válido!!')
                 return nickname
             else:
@@ -34,5 +34,5 @@ class UserInfoGenerator():
 
     def generate_info(self):
         """Cria um novo usuário"""
-        return self.new_login(), self.new_nickname(), self.new_password
+        return self.new_login(), self.new_nickname(), self.new_password()
         

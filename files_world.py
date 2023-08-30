@@ -2,15 +2,32 @@ from user_class import User
 from sing_in_class import SingIn
 from session_class import Session
 from user_info_generator_class import UserInfoGenerator
-from find_user_bynick_class import FindUser
 
 class FilesWorld():
     def __init__(self):
-        self.users = {}
-        self.groups = {}
+        self.__users = {}
+        self.__groups = {}
+
+    @property
+    def users(self):
+        return self.__users
+    
+    @users.setter
+    def users(self, new_user):
+        self.__users[new_user.login] = new_user
+
+    @property
+    def groups(self):
+        return self.__groups
+    
+    @groups.setter
+    def groups(self, new_group):
+        self.__groups[new_group.name] = new_group
 
     def session_init(self, ouser):
         osession = Session(self.users, self.groups, ouser)
+        print(f"Olá {ouser.nickname} Você está conectado a rede.")
+        print("Digite 'lista_de_comandos' para ver os comandos da rede\n")
 
         sair_da_rede = False
         while sair_da_rede == False:
@@ -19,34 +36,22 @@ class FilesWorld():
             if command == 'lista_de_comandos':
                 osession.commands()
             elif command == 'editar_usuario':
-                ouser.edit(self.users)
+                osession.user.edition_init(self.users)
             elif command == 'acessar_perfil':
                 a_user = osession.find_user()
-                ouser.access_perfil(a_user)
+                osession.user.access_perfil(a_user)
             elif command == 'add_amigo':
                 a_user = osession.find_user()
-                ouser.add_amigo(a_user)
+                osession.user.add_amigo(a_user)
             elif command == 'subir_arquivo':
-                PerfilFilesManager().uploading(self.user.nickname)
-                
+                osession.uploading()
             elif command == 'criar_grupo':
-                GrupoCreator().creation(self.groups, self.user)
-
+                osession.group_creation()
             elif command == 'entrar_grupo':
-                name = input("\nNome do grupo em que se deseja entrar: ")
-                group = GroupFinder().find(self.groups, name)
-                if group == None:
-                    print("Esse grupo não existe")
-                else:
-                    if group not in self.user.groups:
-                        print("Você não eh membro do grupo.")
-                    else:
-                        GroupSession(self.users, group, self.user).session()
-
+                osession.entrar_grupo()
             elif command == 'sair':
                 sair_da_rede = True
                 print("Desconectando...\n")
-            
             elif command == 'show':
                 print(self.user)
 
@@ -68,14 +73,11 @@ class FilesWorld():
         majority = self.majority_verification()
         
         if majority == 'nao':
-            print("Você não tem idade suficiente para ser um usuário dessa rede.\n\n")
+            raise Exception("Você não tem idade suficiente para ser um usuário dessa rede.\n\n")
         elif majority == 'sim':
             ouser_info_generator = UserInfoGenerator(self.users)
-            
             login, nickname, password = ouser_info_generator.generate_info()
-            
-            ouser = User(login, nickname, password)
-            self.users[login] = ouser
+            return User(login, nickname, password)
 
     def show(self):
         print("***Users Info***")

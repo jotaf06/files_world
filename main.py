@@ -15,7 +15,11 @@ while True:
     if command == 'sing_in':
         ofilesworld.singning_in()
     elif command == 'sing_up':
-        ofilesworld.singning_up()
+        try:
+            o_user = ofilesworld.singning_up()
+            ofilesworld.users = o_user
+        except Exception as e:
+            print(e)
     elif command == 'exit':
         ofilesworld.exit()
     elif command == 'show':
