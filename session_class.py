@@ -1,11 +1,6 @@
-from user_editor_class import UserEditor
-from perfil_access_class import PerfilAccess
 from perfil_files_manager_class import PerfilFilesManager
 from finder_class import Finder
-from group_creator_class import GrupoCreator
 from group_class import Group
-from group_session_class import GroupSession
-
 
 class Session():
     def __init__(self, users, groups, user):
