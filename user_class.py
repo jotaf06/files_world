@@ -129,12 +129,6 @@ class User():
         elif command == 'cancelar':
             print("Operação abordada...\n")
             return
-    
-    def access_perfil(self, a_user):
-        operfil_files_manager = PerfilFilesManager()
-        access = operfil_files_manager.access_verification(self, a_user)
-        if access:
-            operfil_files_manager.acessing(a_user)
 
     def add_amigo(self, a_user):
         try:
@@ -151,6 +145,12 @@ class User():
         except ValueError as e:
             print(e)
         
+    def acessing(self, a_user, manager):
+        if self in a_user.friends:
+            manager.acessing(self, a_user)
+        else:
+            print("Você não tem acesso a esse perfil")
+            
     def non_existing_user(self):
         print("Usuário inexistente. Esse login não está cadastrado na rede.")
         print("Abordando operação sing_in...\n")
@@ -162,3 +162,10 @@ class User():
         string += f"    senha: {self.password}\n"
         string += f"    privacidade: {self.privacity}\n"
         return string
+
+class SuperUser(User):
+    def __init__(self, login, nickname, password):
+        super().__init__(login, nickname, password)
+
+    def acessing(self, a_user, manager):
+        manager.acessing(self, a_user)

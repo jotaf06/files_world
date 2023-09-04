@@ -1,7 +1,8 @@
-from user_class import User
+from user_class import *
 from group_class import Group
 from perfil_files_manager_class import PerfilFilesManager
 
+superuser = SuperUser("vinisuper", "superking", "super123")
 ouser1 = User("vini1", "king1", "123")
 ouser2 = User("vini2", "king2", "123")
 ouser3 = User("vini3", "king3", "123")
@@ -9,7 +10,7 @@ ouser3 = User("vini3", "king3", "123")
 group1 = Group(ouser1, "king_group1")
 ouser1.groups = group1
 
-users = [ouser1, ouser2, ouser3]
+users = [ouser1, ouser2, ouser3, superuser]
 groups = [group1]
 
 class FilesWorld():
@@ -71,7 +72,7 @@ class FilesWorld():
                 nickname = input("Forneça o nickname do perfil que você deseja acessar: ")
                 for a_user in users:
                     if a_user.nickname == nickname:
-                        self.manager.acessing(a_user) 
+                        user.acessing(a_user, self.manager) 
             elif command == 'add_amigo':
                 nickname = input("Forneça o nickname do seu novo amigo: ")
                 for a_user in users:

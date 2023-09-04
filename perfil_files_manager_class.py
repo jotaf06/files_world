@@ -4,7 +4,7 @@ class PerfilFilesManager():
     def __init__(self):
         pass
 
-    def acessing(self, a_user):
+    def acessing(self, user, a_user):
         perfil_dir = os.path.join('files_world2', a_user.nickname)
         print(perfil_dir)
         
