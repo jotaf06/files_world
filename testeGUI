@@ -1,0 +1,55 @@
+import sys
+from files_world import FilesWorld
+import pygame
+import pygwidgets
+from pygame.locals import *
+
+ofilesworld = FilesWorld()
+
+# atributos são usuários e grupos
+
+print("BEM VINDO A REDE FilesWorld!\n")
+print("ATENÇÃO: Os comandos da rede devem ser fornecidos exatamente como forem apresentados.")
+
+def majority_verification():
+    print("Você tem mais de 18 anos? Digite sua respota no seguinte formato:\n")
+    print("'sim' - caso tenha idade maior ou igual a 18 anos.")
+    print("'nao' - caso seja menor de idade.\n")
+    return input("Resposta: ")
+
+if (majority_verification() == "sim"):
+    while True:
+        GRAY = (200, 200, 200)
+        WINDOW_WIDTH = 800
+        WINDOW_HEIGHT = 600
+        FRAMES_PER_SECOND = 30 
+
+        pygame.init()     
+        window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        clock = pygame.time.Clock()   
+    
+        window.fill(GRAY)
+        buttonSIn = pygwidgets.TextButton(window, (295, 280), 'sing_in')
+        buttonSUp = pygwidgets.TextButton(window, (405, 280), 'sing_up')
+        buttonExit = pygwidgets.TextButton(window, (350, 350), 'exit')
+        buttonSIn.draw()
+        buttonSUp.draw()
+        buttonExit.draw()
+
+        pygame.display.update()
+        clock.tick(FRAMES_PER_SECOND)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            
+            if buttonSIn.handleEvent(event):
+                ofilesworld.singning_in()
+            if buttonSUp.handleEvent(event):
+                ofilesworld.singning_up()
+            if buttonExit.handleEvent(event):
+                ofilesworld.exit
+
+else:
+    print("Você não tem idade suficiente para fazer uso da rede")
